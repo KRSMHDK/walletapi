@@ -1,0 +1,3 @@
+class DebitTransaction < Transaction
+
+end

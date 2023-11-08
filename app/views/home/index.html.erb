@@ -1,0 +1,57 @@
+<ul>
+  <div class="form-group">
+    <%= label_tag 'amount', 'Deposit Amount' %>
+    <%= text_field_tag 'amount' %>
+    <button id="deposit" class="btn btn-primary">Deposit</button>
+  </div>
+  <div class="form-group">
+    <%= label_tag 'withdraw-amount', 'Withdraw Amount' %>
+    <%= text_field_tag 'withdraw-amount' %>
+    <button id="withdraw" class="btn btn-primary">Withdraw</button>
+  </div>
+  <li>Balance: 
+    <span id="balance"></span></p>
+  <button id="get-balance" class="btn btn-primary">Get Balance</button>
+  <li>Transaction History:</li>
+</ul>
+<script>
+  var csrfToken = $('meta[name=csrf-token]').attr('content');
+
+  $('#deposit').click(function() {
+    var depositAmount = $('#amount').val()
+    $.ajax({
+      url: '<%= deposit_api_v1_wallets_path %>',
+      type: 'post',
+      headers: { 'X-CSRF-Token': csrfToken },
+      data: { amount: depositAmount },
+      success: function(data) {
+        $('#get-balance').click()
+      }
+    });
+  })
+
+  $('#withdraw').click(function() {
+    var withdrawAmount = $('#withdraw-amount').val()
+    $.ajax({
+      url: '<%= withdraw_api_v1_wallets_path %>',
+      type: 'post',
+      headers: { 'X-CSRF-Token': csrfToken },
+      data: { amount: withdrawAmount },
+      success: function(data) {
+        $('#get-balance').click()
+      }
+    });
+  })
+
+  $('#get-balance').click(function() {
+    $.ajax({
+      url: '<%= balance_api_v1_wallets_path %>',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        console.log(data)
+        $('#balance').text(data.balance);
+      }
+    });
+  })
+</script>
