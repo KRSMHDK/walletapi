@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <td>Type</td>
+    <td>Created At</td>
+    <td>From</td>
+    <td>To</td>
+    <td>Amount</td>
+    <td>Balance</td>
+  </tr>
+  <% transactions.each do |id, t| %>
+    <tr>
+      <td><%= t["transaction_type"] %></td>
+      <td><%= t["created_at"] %></td>
+      <td><%= t["source_wallet_id"] %></td>
+      <td><%= t["target_wallet_id"] %></td>
+      <td><%= t["amount"] %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

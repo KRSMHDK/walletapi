@@ -1,49 +1,49 @@
 module Api
   module V1
     class WalletsController < ApplicationController
-      before_action :authenticate_user
+      before_action :set_user
+      skip_before_action :verify_authenticity_token
 
       def deposit
-        user = User.find(1)
         amount = params[:amount].to_i
 
         if amount <= 0
           render json: { error: 'Invalid deposit amount' }, status: :bad_request
         else
-          user.wallet.deposit(amount)
+          TransactionService.new(amount:, target_wallet_id: @entity.id).deposit
           render json: { message: 'Deposit successful' }, status: :ok
         end
       end
 
       def withdraw
-        user = User.find(1)
         amount = params[:amount].to_i
 
         if amount <= 0
           render json: { error: 'Invalid Withdraw amount' }, status: :bad_request
         else
-          user.wallet.withdraw(amount)
+          TransactionService.new(amount:, source_wallet_id: @entity.id).withdraw
           render json: { message: 'Withdraw successful' }, status: :ok
         end
       end
 
       def balance
-        @user = User.find(1)
-        balance = @user.wallet.balance
+        balance = TransactionService.new(target_wallet_id: @entity.id, source_wallet_id: @entity.id).balance
+        render json: { balance: }, status: :ok
+      end
 
-        response = { balance: balance }
-        render json: response, status: :ok
+      def transfer
+        TransactionService.new(target_wallet_id: params[:target_wallet_id], source_wallet_id: @entity.id, amount: params[:amount]).transfer
       end
 
       def transactions
-        data = { message: 'Data retrieved successfully' }
-        render json: data, status: :ok
+        transactions_history = TransactionService.new(target_wallet_id: @entity.id, source_wallet_id: @entity.id).transactions_history
+        render json: { transactions_history: }, status: :ok
       end
 
       private
 
-      def authenticate_user
-    
+      def set_user
+        @entity = Entity.find(params[:id])
       end
     end
   end
