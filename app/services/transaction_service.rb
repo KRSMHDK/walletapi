@@ -19,10 +19,7 @@ class TransactionService
   end
 
   def balance
-    credit = Transaction.where(transaction_type: 'Credit', target_wallet_id: @target_wallet_id).sum(:amount)
-    debit = Transaction.where(transaction_type: 'Debit', source_wallet_id: @source_wallet_id).sum(:amount)
-
-    credit - debit
+    Wallet.find(@target_wallet_id).balance
   end
 
   def transactions_history
