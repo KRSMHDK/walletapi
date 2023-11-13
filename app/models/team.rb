@@ -1,3 +1,2 @@
 class Team < Entity
-
 end

@@ -95,6 +95,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     debug_inspector (1.1.0)
+    dockerfile-rails (1.5.12)
+      rails (>= 3.0.0)
     erubi (1.12.0)
     faraday (2.7.11)
       base64
@@ -197,6 +199,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.13.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.13.0)
+    sentry-ruby (5.13.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     spring (4.1.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -239,6 +246,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  dockerfile-rails (>= 1.5)
   faraday
   importmap-rails
   jbuilder
@@ -246,6 +254,8 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8)
   selenium-webdriver
+  sentry-rails (~> 5.13)
+  sentry-ruby (~> 5.13)
   spring
   sprockets-rails
   sqlite3 (~> 1.4)

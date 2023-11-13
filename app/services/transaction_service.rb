@@ -26,7 +26,7 @@ class TransactionService
   end
 
   def transactions_history
-    transactions = Transaction.where(target_wallet_id: @target_wallet_id).or(Transaction.where(source_wallet_id: @source_wallet_id))
+    transactions = Transaction.where(transaction_type: 'Credit', target_wallet_id: @target_wallet_id).or(Transaction.where(transaction_type: 'Debit', source_wallet_id: @source_wallet_id)).order(created_at: :desc)
 
     hash = {}
     transactions.each do |transaction|

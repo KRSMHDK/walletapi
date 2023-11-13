@@ -1,3 +1,2 @@
 class Stock < Entity
-
 end

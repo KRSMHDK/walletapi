@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
   def index
     if session[:user].present?
+      @entity = Entity.find(session[:user]["id"])
       @balance = balance
       @transactions = transactions
     end
@@ -20,20 +21,27 @@ class HomeController < ApplicationController
   def withdraw
     parameters = { amount: params[:amount] }
     Faraday.post(withdraw_api_v1_wallet_url(session[:user]["id"]), parameters)
+
+    redirect_to root_path
   end
 
   def deposit
     parameters = { amount: params[:amount] }
     Faraday.post(deposit_api_v1_wallet_url(session[:user]["id"]), parameters)
+
+    redirect_to root_path
   end
 
   def transfer
     parameters = { target_wallet_id: params[:entity_id], amount: params[:amount]}
     Faraday.post(transfer_api_v1_wallet_url(session[:user]["id"]), parameters)
+
+    redirect_to root_path
   end
 
   def sign_in
     entity = Entity.find(params[:entity_id])
+
     session[:user] = entity
     redirect_to root_path
   end
