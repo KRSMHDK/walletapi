@@ -1,5 +1,6 @@
 <header>
   <div class="form-group">
+
     <% if session[:user].present? %>
       <%= "Hello #{@entity.type}-#{@entity.id}" %>
       <%= link_to "Sign Out", sign_out_path %>
@@ -13,6 +14,7 @@
         <%= form.submit "Login" %>
       <% end %>
     <% end %>
-     <%= link_to "Api Docs", api_docs_path %>
+    <%= link_to "Home", root_path %>
+    <%= link_to "Api Docs", api_docs_path %>
   </div>
 </header>
