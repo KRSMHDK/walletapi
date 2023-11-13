@@ -5,6 +5,7 @@ class Entity < ApplicationRecord
   private
 
   def create_wallet
-    Wallet.create(entity: self)
+    wallet = Wallet.create(entity: self)
+    update(wallet_id: wallet.id)
   end
 end
