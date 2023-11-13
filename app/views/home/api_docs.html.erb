@@ -1,0 +1,59 @@
+<%= render partial: 'header' %>
+<main>
+  <h1>Wallet API Documentation</h1>
+
+  <h2>Withdraw API</h2>
+  <p>
+    To withdraw funds from a wallet, make a <code>POST</code> request to the following URL:
+  </p>
+  <pre>
+    <code>POST <%= withdraw_api_v1_wallets_url %></code>
+    <br>
+    Parameters:
+    <code>{ amount: params[:amount], entity_id: @entity.id }</code>
+  </pre>
+
+  <h2>Deposit API</h2>
+  <p>
+    To deposit funds into a wallet, make a <code>POST</code> request to the following URL:
+  </p>
+  <pre>
+    <code>POST <%= deposit_api_v1_wallets_url %></code>
+    <br>
+    Parameters:
+    <code>{ amount: params[:amount], entity_id: @entity.id }</code>
+  </pre>
+
+  <h2>Transactions API</h2>
+  <p>
+    To retrieve a list of transactions for a wallet, make a <code>GET</code> request to the following URL:
+  </p>
+  <pre>
+    <code>GET <%= transactions_api_v1_wallets_url %></code>
+    <br>
+    Parameters:
+    <code>{ entity_id: @entity.id }</code>
+  </pre>
+
+  <h2>Balance API</h2>
+  <p>
+    To check the balance of a wallet, make a <code>GET</code> request to the following URL:
+  </p>
+  <pre>
+    <code>GET <%= balance_api_v1_wallets_url %></code>
+    <br>
+    Parameters:
+    <code>{ entity_id: @entity.id }</code>
+  </pre>
+
+  <h2>Transfer API</h2>
+  <p>
+    To transfer funds between wallets, make a <code>POST</code> request to the following URL:
+  </p>
+  <pre>
+    <code>POST <%= transfer_api_v1_wallets_url %></code>
+    <br>
+    Parameters:
+    <code>{ entity_id: @entity.id, target_wallet_id: params[:entity_id], amount: params[:amount] }</code>
+  </pre>
+</main>
