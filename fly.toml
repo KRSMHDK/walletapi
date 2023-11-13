@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for walletapi on 2023-11-12T15:47:32+08:00
+# fly.toml app configuration file generated for wallety on 2023-11-13T22:07:27+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "walletapi"
-primary_region = "sin"
+app = "wallety"
+primary_region = "syd"
 console_command = "/rails/bin/rails console"
 
 [build]
