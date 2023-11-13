@@ -43,7 +43,7 @@ module Api
       private
 
       def set_user
-        @entity = Entity.find(params[:id])
+        @entity = Entity.find(params[:entity_id])
       end
     end
   end
